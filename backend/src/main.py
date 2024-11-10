@@ -1,4 +1,5 @@
 from fastapi import FastAPI, UploadFile, File, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from .models import Document, Question
 from langchain.schema import Document as DocumentSchema
@@ -12,6 +13,18 @@ from .ai import get_gemini_chain
 load_dotenv()
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:5173"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 qa_chain = get_gemini_chain()
 
