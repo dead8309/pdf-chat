@@ -1,50 +1,58 @@
-# React + TypeScript + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend for the PDF Chat application, built with Vite and designed to interact with the FastAPI backend.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Ensure the **backend** is running before starting the frontend.
+- The backend server should be available at `http://localhost:8000` (or update the frontend if you’re using a different backend URL).
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Setup Instructions
 
-- Configure the top-level `parserOptions` property like this:
+### 1. Clone the Repository
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+git clone https://github.com/dead8309/pdf-chat
+cd frontend
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 2. Install Dependencies
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+pnpm install
 ```
+
+### 3. Start the Backend
+
+Make sure the FastAPI backend server is running:
+
+```bash
+cd ../backend
+uvicorn src.main:app --reload
+```
+
+The backend should now be accessible at `http://localhost:8000`.
+
+### 4. Run the Frontend
+
+In a new terminal window, go back to the `frontend` directory and start the Vite development server:
+
+```bash
+pnpm dev
+```
+
+This will start the frontend server at `http://localhost:5173` (default Vite port). Open your browser and go to `http://localhost:5173` to view the app.
+
+---
+
+## Build for Production
+
+To create an optimized build of the frontend for production:
+
+```bash
+pnpm build
+```
+
+The production-ready files will be output to the `dist` directory.
